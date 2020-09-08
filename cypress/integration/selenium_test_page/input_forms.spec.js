@@ -1,3 +1,4 @@
+let a = 10;
 let test_data = {
     value: "test123456",
     a: 10,
