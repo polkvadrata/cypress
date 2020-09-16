@@ -114,10 +114,10 @@ xdescribe('Ajax Form Submit with Loading icon', () => {
         cy.get("#title").type("title")
         cy.get("#description").type("description")
         cy.get('#btn-submit').click()
-        
+
         cy.get("#submit-control img").should("be.visible");
         //cy.get("#submit-control").should("have.text", "Ajax");
-        
+
         cy.get("#submit-control").should("have.text", "Form submited Successfully!");
         cy.get("#submit-control img").should('not.exist');
         cy.get('#btn-submit').should('not.exist');
@@ -137,18 +137,30 @@ describe('Single Select - Search and Select country', () => {
         cy.get('span>input.select2-search__field').type(part);
 
         cy.get("#select2-country-results > li").each(($el) => {
-            cy.wrap($el).should("contain",part);
+            cy.wrap($el).should("contain", part);
         });
     });
 
-    it('Select Multiple Values', () => {
-        let part = "col"
-        let re = new RegExp('col', 'i')
+    xit('Select Multiple Values', () => {
+        let part = "col";
+        let re = new RegExp(part, 'i');
+
         cy.get('span.select2-container--default span.select2-selection--multiple').click()
         cy.get('input.select2-search__field').type(part);
         cy.get("ul.select2-results__options li:first-child").click();
 
         cy.get("span.select2-selection--multiple li:first-child").invoke('text').should('match', re)
+    });
+
+    it('Drop Down with Disabled values', () => {
+        let territorie = "gu";
+        let re = new RegExp(territorie, 'i');
+        
+        cy.contains('Drop Down with Disabled values').parent().parent().find('.select2-selection__arrow b').click()
+        cy.get('span.select2-search--dropdown input').type(territorie);
+        cy.get("span.select2-container--open ul>li")
+        .should('have.attr', 'aria-disabled', 'true')
+        .invoke('text').should('match', re);
     });
 
 });
