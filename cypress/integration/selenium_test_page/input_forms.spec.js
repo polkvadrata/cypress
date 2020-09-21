@@ -152,7 +152,7 @@ describe('Single Select - Search and Select country', () => {
         cy.get("span.select2-selection--multiple li:first-child").invoke('text').should('match', re)
     });
 
-    it('Drop Down with Disabled values', () => {
+    xit('Drop Down with Disabled values', () => {
         let territorie = "gu";
         let re = new RegExp(territorie, 'i');
         
